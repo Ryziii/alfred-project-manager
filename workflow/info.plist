@@ -12,17 +12,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>7E5DA35F-1364-4EA4-A547-9C7845EF6BEC</string>
-				<key>modifiers</key>
-				<integer>262144</integer>
-				<key>modifiersubtext</key>
-				<string>Open repo URL</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>80C9A89F-7B23-49D6-A60E-EB052C35FEE4</string>
+				<string>BE1B8E2A-733A-447E-8EF1-314DFD00E7F1</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -32,21 +22,41 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>6D608B30-5502-43EE-919B-DF50AFCF905A</string>
+				<string>C1D2E3F4-5678-90AB-CDEF-123456789ABC</string>
 				<key>modifiers</key>
-				<integer>1048576</integer>
+				<integer>131072</integer>
 				<key>modifiersubtext</key>
-				<string>Open in iTerm</string>
+				<string></string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>BE1B8E2A-733A-447E-8EF1-314DFD00E7F1</string>
+				<string>80C9A89F-7B23-49D6-A60E-EB052C35FEE4</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>6D608B30-5502-43EE-919B-DF50AFCF905A</string>
 				<key>modifiers</key>
 				<integer>524288</integer>
 				<key>modifiersubtext</key>
-				<string>Reveal in Finder</string>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>7E5DA35F-1364-4EA4-A547-9C7845EF6BEC</string>
+				<key>modifiers</key>
+				<integer>262144</integer>
+				<key>modifiersubtext</key>
+				<string></string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -123,17 +133,17 @@
 				<key>argumenttrimmode</key>
 				<integer>0</integer>
 				<key>argumenttype</key>
-				<integer>0</integer>
+				<integer>1</integer>
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>keyword</key>
 				<string>pm</string>
 				<key>queuedelaycustom</key>
-				<integer>3</integer>
+				<real>0.3</real>
 				<key>queuedelayimmediatelyinitially</key>
 				<true/>
 				<key>queuedelaymode</key>
-				<integer>1</integer>
+				<integer>0</integer>
 				<key>queuemode</key>
 				<integer>2</integer>
 				<key>runningsubtext</key>
@@ -145,13 +155,13 @@
 				<key>scriptfile</key>
 				<string></string>
 				<key>subtext</key>
-				<string>Open in VSCode</string>
+				<string>Search projects</string>
 				<key>title</key>
 				<string></string>
 				<key>type</key>
 				<integer>0</integer>
 				<key>withspace</key>
-				<true/>
+				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.scriptfilter</string>
@@ -164,7 +174,7 @@
 			<key>config</key>
 			<dict>
 				<key>openwith</key>
-				<string>/Applications/iTerm.app</string>
+				<string>/Applications/kitty.app</string>
 				<key>sourcefile</key>
 				<string></string>
 			</dict>
@@ -221,6 +231,29 @@
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>/Applications/kitty.app/Contents/MacOS/kitty claude "${1}"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>C1D2E3F4-5678-90AB-CDEF-123456789ABC</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>See https://github.com/bjrnt/alfred-project-manager</string>
@@ -261,6 +294,13 @@
 			<key>ypos</key>
 			<real>370</real>
 		</dict>
+		<key>C1D2E3F4-5678-90AB-CDEF-123456789ABC</key>
+		<dict>
+			<key>xpos</key>
+			<real>560</real>
+			<key>ypos</key>
+			<real>160</real>
+		</dict>
 		<key>FBC8069B-1615-4CD3-BA60-146A434156A1</key>
 		<dict>
 			<key>xpos</key>
@@ -276,19 +316,19 @@
 			<dict>
 				<key>default</key>
 				<string></string>
-				<key>filtermode</key>
-				<integer>1</integer>
 				<key>placeholder</key>
-				<string></string>
+				<string>~/Code:~/Projects</string>
 				<key>required</key>
+				<true/>
+				<key>trim</key>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>The directory containing your projects</string>
+			<string>Project collection directories — their immediate children are scanned as project candidates. Use colon (:) to separate multiple paths. Avoid broad directories like ~/Desktop.</string>
 			<key>label</key>
-			<string>Project Directory</string>
+			<string>Project Directories</string>
 			<key>type</key>
-			<string>filepicker</string>
+			<string>textfield</string>
 			<key>variable</key>
 			<string>ProjectDirectory</string>
 		</dict>
@@ -296,26 +336,26 @@
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<false/>
+				<true/>
 				<key>required</key>
 				<false/>
 				<key>text</key>
-				<string>Require Git Repo</string>
+				<string>Detect code projects</string>
 			</dict>
 			<key>description</key>
-			<string>Enable this to hide folders in your project directory that are not valid git repos</string>
+			<string>Enable this to automatically detect code projects by checking for vendor/build directories (e.g. .git, node_modules) and source code files.</string>
 			<key>label</key>
-			<string>Show only valid Git repos</string>
+			<string>Detect code projects</string>
 			<key>type</key>
 			<string>checkbox</string>
 			<key>variable</key>
-			<string>RequireDotGit</string>
+			<string>DetectCodeProjects</string>
 		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>0</string>
+				<string>999</string>
 				<key>placeholder</key>
 				<string></string>
 				<key>required</key>
@@ -334,7 +374,7 @@
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.5.0</string>
+	<string>1.6.0</string>
 	<key>webaddress</key>
 	<string>https://www.github.com/bjrnt</string>
 </dict>

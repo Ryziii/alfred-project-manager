@@ -5,31 +5,32 @@ import (
 	"os"
 	"path"
 	"strconv"
+	"strings"
 )
 
 const (
-	projectDirEnvVar   = "ProjectDirectory"
-	reqDotGitEnvVar    = "RequireDotGit"
-	maxProjDepthEnvVar = "MaxProjectDepth"
-	maxResults         = 5
+	projectDirEnvVar      = "ProjectDirectory"
+	detectCodeProjectsVar = "DetectCodeProjects"
+	maxProjDepthEnvVar    = "MaxProjectDepth"
+	maxResults            = 5
 )
 
 type Params struct {
-	ProjectsDir     string
-	RequireDotGit   bool
-	MaxProjectDepth uint
-	MaxResults      uint
+	ProjectsDirs     []string
+	DetectCodeProjects bool
+	MaxProjectDepth  uint
+	MaxResults       uint
 }
 
 func NewParamsFromEnv() (*Params, error) {
 	projDir := os.Getenv(projectDirEnvVar)
 	if len(projDir) == 0 {
-		return nil, fmt.Errorf("Please set project directory before using the workflow")
+		return nil, fmt.Errorf("Please set project directories before using the workflow")
 	}
 
-	reqDotGit, err := strconv.ParseBool(os.Getenv(reqDotGitEnvVar))
+	detectCode, err := strconv.ParseBool(os.Getenv(detectCodeProjectsVar))
 	if err != nil {
-		return nil, fmt.Errorf("could not parse %s: %w", reqDotGitEnvVar, err)
+		return nil, fmt.Errorf("could not parse %s: %w", detectCodeProjectsVar, err)
 	}
 
 	maxProjDepth, err := strconv.Atoi(os.Getenv(maxProjDepthEnvVar))
@@ -38,25 +39,48 @@ func NewParamsFromEnv() (*Params, error) {
 	}
 
 	return &Params{
-		ProjectsDir:     projDir,
-		RequireDotGit:   reqDotGit,
-		MaxProjectDepth: uint(maxProjDepth),
-		MaxResults:      maxResults,
+		ProjectsDirs:      splitDirs(projDir),
+		DetectCodeProjects: detectCode,
+		MaxProjectDepth:   uint(maxProjDepth),
+		MaxResults:        maxResults,
 	}, nil
 }
 
 func (p *Params) Equal(p2 Params) bool {
-	return p.RequireDotGit == p2.RequireDotGit &&
-		p.MaxProjectDepth == p2.MaxProjectDepth &&
-		p.MaxResults == p2.MaxResults &&
-		p.ProjectsDir == p2.ProjectsDir
+	if p.DetectCodeProjects != p2.DetectCodeProjects ||
+		p.MaxProjectDepth != p2.MaxProjectDepth ||
+		p.MaxResults != p2.MaxResults ||
+		len(p.ProjectsDirs) != len(p2.ProjectsDirs) {
+		return false
+	}
+	for i, d := range p.ProjectsDirs {
+		if d != p2.ProjectsDirs[i] {
+			return false
+		}
+	}
+	return true
 }
 
-func (p *Params) ProjectsPath() string {
-	// absolute paths with be honored
-	if path.IsAbs(p.ProjectsDir) {
-		return p.ProjectsDir
+func (p *Params) ProjectsPaths() []string {
+	paths := make([]string, len(p.ProjectsDirs))
+	for i, d := range p.ProjectsDirs {
+		if path.IsAbs(d) {
+			paths[i] = d
+		} else {
+			paths[i] = path.Join(os.Getenv("HOME"), d)
+		}
 	}
-	// Relative paths are in relation to the user's home directory
-	return path.Join(os.Getenv("HOME"), p.ProjectsDir)
+	return paths
+}
+
+func splitDirs(raw string) []string {
+	parts := strings.Split(raw, ":")
+	result := make([]string, 0, len(parts))
+	for _, p := range parts {
+		p = strings.TrimSpace(p)
+		if p != "" {
+			result = append(result, p)
+		}
+	}
+	return result
 }
