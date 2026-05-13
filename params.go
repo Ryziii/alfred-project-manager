@@ -12,7 +12,7 @@ const (
 	projectDirEnvVar      = "ProjectDirectory"
 	detectCodeProjectsVar = "DetectCodeProjects"
 	maxProjDepthEnvVar    = "MaxProjectDepth"
-	maxResults            = 5
+	maxResults            = 0
 )
 
 type Params struct {

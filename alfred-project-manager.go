@@ -92,6 +92,7 @@ func run() {
 		item := wf.NewFileItem(project.Path).
 			Title(project.Name()).
 			Subtitle(label).
+			Match(prettyPath(project.Path)).
 			Arg(project.Path).
 			Var("url", project.URL).
 			UID(project.Path).
